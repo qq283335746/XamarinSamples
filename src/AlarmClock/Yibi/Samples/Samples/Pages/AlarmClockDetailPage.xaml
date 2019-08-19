@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yibi.Samples.Core.Pages.AlarmClockDetailPage"
+             Title="Edit Alarm Clock Info">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Text="Name" VerticalTextAlignment="Center" />
+        <Editor Grid.Row="0" Grid.Column="1" TabIndex="0" Placeholder="Enter Your Alarm Clock Name"
+                Text="{Binding Name}" />
+
+        <Label Grid.Row="1" Text="Date" VerticalTextAlignment="Center" />
+        <DatePicker Grid.Row="1" Grid.Column="1" TabIndex="1" Format="yyyy-MM-dd" 
+                    MinimumDate="{Binding MinDate}"
+                    MaximumDate="{Binding MaxDate}"
+                    Date="{Binding SelectedDate}" />
+
+        <Label Grid.Row="2" Text="Time" VerticalTextAlignment="Center" />
+        <TimePicker Grid.Row="2" Grid.Column="1" TabIndex="2" Format="HH:mm:ss" Time="{Binding SelectedTime}" />
+
+        <Button Grid.Row="3" Text="Pick Audio" Clicked="OnBtnPickFileClicked" BackgroundColor="LightSeaGreen" TextColor="White" />
+        <Button Grid.Row="3" Grid.Column="1" Text="点击预听" Clicked="OnBtnAudioClicked" BackgroundColor="LightSeaGreen" TextColor="White" />
+
+        <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Text="Save" Clicked="OnBtnSaveClicked" BackgroundColor="LightSeaGreen" TextColor="White" />
+            <Button Text="Delete" Clicked="OnBtnDeleteClicked" BackgroundColor="LightSeaGreen" TextColor="White"/>
+        </StackLayout>
+        
+    </Grid>
+</ContentPage>
