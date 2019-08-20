@@ -5,6 +5,7 @@
              Title="Alarm Clock List">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+" Clicked="OnBtnAddClicked" />
+        <ToolbarItem Text="#" Clicked="OnBtnToCalendarClicked" />
     </ContentPage.ToolbarItems>
     <ListView x:Name="listView"
               Margin="20"

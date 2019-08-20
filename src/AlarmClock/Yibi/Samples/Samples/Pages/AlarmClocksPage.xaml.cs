@@ -41,6 +41,14 @@ namespace Yibi.Samples.Core.Pages
             });
         }
 
+        async void OnBtnToCalendarClicked(object sender,EventArgs e)
+        {
+            await Navigation.PushAsync(new CalendarAlarmClockPage
+            {
+                
+            });
+        }
+
         async void OnLvItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
@@ -49,7 +57,7 @@ namespace Yibi.Samples.Core.Pages
 
                 await Navigation.PushAsync(new AlarmClockDetailPage
                 {
-                    BindingContext = new AlarmClockDetailModel {ID=model.ID, Name = model.Name,AlarmTime = model.AlarmTime,MusicPath=model.MusicPath, MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = model.AlarmTime,SelectedTime= new TimeSpan(model.AlarmTime.Hour, model.AlarmTime.Minute, model.AlarmTime.Second) }
+                    BindingContext = new AlarmClockDetailModel {ID=model.ID, Name = model.Name,AlarmTime = model.AlarmTime,MusicName = model.MusicName,MusicPath=model.MusicPath, MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = model.AlarmTime,SelectedTime= new TimeSpan(model.AlarmTime.Hour, model.AlarmTime.Minute, model.AlarmTime.Second) }
                 });;
             }
         }

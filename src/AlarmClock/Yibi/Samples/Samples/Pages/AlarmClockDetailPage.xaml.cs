@@ -1,6 +1,8 @@
-﻿using Plugin.FilePicker;
+﻿using MediaManager;
+using Plugin.FilePicker;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +28,8 @@ namespace Yibi.Samples.Core.Pages
 
         async void OnBtnPickFileClicked(object sender,EventArgs e)
         {
-            var mediaTypes = new string[] {"mp3", "mfm","rtttl", "midi", "mmf", "amr", "mpeg", "waw","wav","wma", "aac" };
-            await PickAndShowFile(mediaTypes);
+            //var mediaTypes = new string[] {"mp3", "mfm","rtttl", "midi", "mmf", "amr", "mpeg", "waw","wav","wma", "aac" };
+            await PickAndShowFile(null);
         }
 
         async Task PickAndShowFile(string[] fileTypes)
@@ -40,7 +42,9 @@ namespace Yibi.Samples.Core.Pages
                 {
                     var viewModel = (AlarmClockDetailModel)BindingContext;
                     viewModel.MusicPath = pickedFile.FilePath;
-                    viewModel.MusicName = pickedFile.FileName;
+                    viewModel.MusicName = Path.GetFileName(pickedFile.FilePath);
+
+                    BindingContext = viewModel;
                 }
             }
             catch (Exception ex)
@@ -52,6 +56,8 @@ namespace Yibi.Samples.Core.Pages
         async void OnBtnAudioClicked(object sender,EventArgs e)
         {
             var viewModel = (AlarmClockDetailModel)BindingContext;
+            if(!string.IsNullOrEmpty(viewModel.MusicPath)) await CrossMediaManager.Current.Play(viewModel.MusicPath);
+
 
         }
 
@@ -60,7 +66,7 @@ namespace Yibi.Samples.Core.Pages
             var viewModel = (AlarmClockDetailModel)BindingContext;
             if (string.IsNullOrEmpty(viewModel.Name)) return;
 
-            var alarmClockInfo = new AlarmClockInfo { ID = viewModel.ID, Name = viewModel.Name, AlarmTime = DateTime.Parse($"{viewModel.SelectedDate.ToString("yyyy-MM-dd")} {viewModel.SelectedTime.Hours}:{viewModel.SelectedTime.Minutes}:{viewModel.SelectedTime.Seconds}"), MusicPath = viewModel.MusicPath };
+            var alarmClockInfo = new AlarmClockInfo { ID = viewModel.ID, Name = viewModel.Name,MusicName = viewModel.MusicName, MusicPath = viewModel.MusicPath, AlarmTime = DateTime.Parse($"{viewModel.SelectedDate.ToString("yyyy-MM-dd")} {viewModel.SelectedTime.Hours}:{viewModel.SelectedTime.Minutes}:{viewModel.SelectedTime.Seconds}") };
             if (alarmClockInfo.ID < 1) alarmClockInfo.CreatedDate = DateTime.UtcNow;
             alarmClockInfo.LastUpdatedDate = DateTime.UtcNow;
 

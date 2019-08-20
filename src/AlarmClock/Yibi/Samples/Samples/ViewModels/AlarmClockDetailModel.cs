@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 
 namespace Yibi.Samples.Core.ViewModels
 {
-    public class AlarmClockDetailModel
+    class AlarmClockDetailModel:BaseViewModel
     {
         public int ID { get; set; }
 
@@ -22,6 +21,17 @@ namespace Yibi.Samples.Core.ViewModels
 
         public string MusicPath { get; set; }
 
-        public string MusicName { get; set; }
+        private string _musicName;
+
+        public string MusicName
+        {
+            get { return _musicName; }
+            set
+            {
+                _musicName = value;
+
+                OnPropertyChanged(nameof(MusicName));
+            }
+        }
     }
 }

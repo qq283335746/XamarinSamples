@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediaManager;
+using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,22 +24,11 @@ namespace Yibi.Samples.Core
             }
         }
 
-        static NoteDatabase noteDatabase;
-        public static NoteDatabase NoteDatabase
-        {
-            get
-            {
-                if (noteDatabase == null)
-                {
-                    noteDatabase = new NoteDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "YibiDb.db3"));
-                }
-                return noteDatabase;
-            }
-        }
-
         public App()
         {
             InitializeComponent();
+
+            CrossMediaManager.Current.Init();
 
             //FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
