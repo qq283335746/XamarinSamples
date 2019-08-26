@@ -19,8 +19,12 @@ namespace Yibi.Samples.Core
 
         public async Task<AlarmClockInfo> GetEnableAlarmClockAsync()
         {
+            var currTime = DateTime.Now.ToLocalTime();
+            var currentTime = new DateTime(currTime.Year, currTime.Month, currTime.Day, currTime.Hour, currTime.Minute, 0);
+
             var datas = await _database.Table<AlarmClockInfo>().ToListAsync();
-            return datas.Where(m=>m.AlarmTime >= DateTime.UtcNow && m.AlarmTime <= DateTime.UtcNow.AddSeconds(5) && m.IsEnable).OrderBy(m=>m.AlarmTime).FirstOrDefault();
+
+            return datas.FirstOrDefault(m => m.IsEnable && new DateTime(m.AlarmTime.Year, m.AlarmTime.Month, m.AlarmTime.Day, m.AlarmTime.Hour, m.AlarmTime.Minute, 0) == currentTime);
         }
 
         public async Task<List<AlarmClockInfo>> GetAlarmClocksAsync()

@@ -6,8 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Yibi.Samples.Core;
 using Android.Content;
+using Xamarin.Forms;
+using Yibi.Samples.Messages;
+using Yibi.Samples.Droid.Services;
 
 namespace Yibi.Samples.Droid
 {
@@ -26,7 +28,9 @@ namespace Yibi.Samples.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            OneShotAlarm();
+            //OneShotAlarm();
+
+            WireUpLongRunningTask();
 
             LoadApplication(new App());
         }
@@ -52,6 +56,19 @@ namespace Yibi.Samples.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        void WireUpLongRunningTask()
+        {
+            MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", message => {
+                var intent = new Intent(this, typeof(LongRunningTaskService));
+                StartService(intent);
+            });
+
+            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message => {
+                var intent = new Intent(this, typeof(LongRunningTaskService));
+                StopService(intent);
+            });
         }
     }
 }

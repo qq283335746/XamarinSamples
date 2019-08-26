@@ -19,7 +19,8 @@ namespace Yibi.Samples.Droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            //new ShowAlarmClock();
+            //var name = new Intent(this, typeof(ShowAlarmClock));
+            //StartActivity(name);
 
             //Toast.MakeText(context, "this is yibi alarm message receive", ToastLength.Long).Show();
 

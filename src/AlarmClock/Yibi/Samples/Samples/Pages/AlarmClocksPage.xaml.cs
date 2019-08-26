@@ -10,6 +10,7 @@ using Yibi.Samples.Core.Models;
 using Yibi.Samples.ViewModels;
 using Yibi.Samples.Pages;
 using System.Threading;
+using Yibi.Samples.Messages;
 
 namespace Yibi.Samples.Pages
 {
@@ -18,6 +19,10 @@ namespace Yibi.Samples.Pages
         public AlarmClocksPage()
         {
             InitializeComponent();
+
+            HandleSendedMessages();
+
+            HandleReceivedMessages();
 
             //DoTimerRunning();
         }
@@ -77,7 +82,7 @@ namespace Yibi.Samples.Pages
                 {
                     if (alarmClockInfo.AlarmTime <= DateTime.UtcNow)
                     {
-                        Navigation.PushAsync(new ShowAlarmClock
+                        Navigation.PushAsync(new ShowAlarmClockPage
                         {
                             BindingContext = alarmClockInfo
                         }).Wait();
@@ -125,6 +130,24 @@ namespace Yibi.Samples.Pages
 
             //    return false;
             //});
+        }
+
+        void HandleSendedMessages()
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                var message = new StartLongRunningTaskMessage();
+                MessagingCenter.Send(message, "StartLongRunningTaskMessage");
+            });
+        }
+
+        void HandleReceivedMessages()
+        {
+            MessagingCenter.Subscribe<TickedMessage>(this, "TickedMessage", async message => {
+                await Navigation.PushAsync(new ShowAlarmClockPage
+                {
+                    BindingContext = new AlarmClockInfo { ID = int.Parse(message.Id) }
+                });
+            });
         }
     }
 }

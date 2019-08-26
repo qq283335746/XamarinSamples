@@ -19,7 +19,17 @@ namespace Yibi.Samples.ViewModels
 
         public TimeSpan SelectedTime { get; set; }
 
-        public string MusicPath { get; set; }
+        private string _musicPath;
+        public string MusicPath
+        {
+            get { return _musicPath; }
+            set
+            {
+                _musicPath = value;
+
+                OnPropertyChanged(nameof(MusicPath));
+            }
+        }
 
         private string _musicName;
 

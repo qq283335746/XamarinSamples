@@ -12,7 +12,7 @@
               ItemSelected="OnLvItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <TextCell Text="{Binding Name}" Detail="{Binding LastUpdatedDate}" />
+                <TextCell Text="{Binding Name}" Detail="{Binding AlarmTime}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

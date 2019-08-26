@@ -67,8 +67,10 @@ namespace Yibi.Samples.Pages
             if (string.IsNullOrEmpty(viewModel.Name)) return;
 
             var alarmClockInfo = new AlarmClockInfo { ID = viewModel.ID, Name = viewModel.Name,MusicName = viewModel.MusicName, MusicPath = viewModel.MusicPath, AlarmTime = DateTime.Parse($"{viewModel.SelectedDate.ToString("yyyy-MM-dd")} {viewModel.SelectedTime.Hours}:{viewModel.SelectedTime.Minutes}:{viewModel.SelectedTime.Seconds}") };
+            alarmClockInfo.AlarmTime = alarmClockInfo.AlarmTime.ToLocalTime();
             if (alarmClockInfo.ID < 1) alarmClockInfo.CreatedDate = DateTime.UtcNow;
             alarmClockInfo.LastUpdatedDate = DateTime.UtcNow;
+            alarmClockInfo.IsEnable = true;
 
             await App.DbContext.SaveAlarmClockAsync(alarmClockInfo);
 
