@@ -4,7 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using Yibi.Samples.Core;
+using Yibi.Samples;
 
 namespace Yibi.Samples.iOS
 {

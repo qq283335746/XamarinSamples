@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yibi.Samples.Core.Models;
 
-namespace Yibi.Samples.Core.Datas
+namespace Yibi.Samples.Core
 {
     public class SqliteContext
     {

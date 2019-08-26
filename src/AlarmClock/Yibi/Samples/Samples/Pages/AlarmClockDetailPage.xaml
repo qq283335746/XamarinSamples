@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Yibi.Samples.Core.Pages.AlarmClockDetailPage"
+             x:Class="Yibi.Samples.Pages.AlarmClockDetailPage"
              Title="Edit Alarm Clock Info">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -30,7 +30,7 @@
         <TimePicker Grid.Row="2" Grid.Column="1" TabIndex="2" Format="HH:mm:ss" Time="{Binding SelectedTime}" />
 
         <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Editor Text="{Binding MusicName}" Placeholder="Audio Seleted" />
+            <Editor Text="{Binding MusicName}" Placeholder="Audio Seleted" WidthRequest="200" />
             <Button Text="Pick Audio" Clicked="OnBtnPickFileClicked" BackgroundColor="LightSeaGreen" TextColor="White" WidthRequest="70" />
             <Button Text="Test" Clicked="OnBtnAudioClicked" BackgroundColor="LightSeaGreen" TextColor="White" WidthRequest="60" />
         </StackLayout>

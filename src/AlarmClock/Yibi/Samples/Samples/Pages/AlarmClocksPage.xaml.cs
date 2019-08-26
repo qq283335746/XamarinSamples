@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yibi.Samples.Core.Models;
-using Yibi.Samples.Core.ViewModels;
+using Yibi.Samples.ViewModels;
+using Yibi.Samples.Pages;
 
-namespace Yibi.Samples.Core.Pages
+namespace Yibi.Samples.Pages
 {
     public partial class AlarmClocksPage : ContentPage
     {
@@ -23,6 +24,11 @@ namespace Yibi.Samples.Core.Pages
             base.OnAppearing();
 
             listView.ItemsSource = await App.DbContext.GetAlarmClocksAsync();
+
+            await Navigation.PushAsync(new ShowAlarmClock
+            {
+                BindingContext = new AlarmClockDetailModel { MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = CurrentTime, SelectedTime = (CurrentTime.AddMinutes(30) - CurrentTime) }
+            });
         }
 
         private DateTime CurrentTime
@@ -37,15 +43,15 @@ namespace Yibi.Samples.Core.Pages
         {
             await Navigation.PushAsync(new AlarmClockDetailPage
             {
-                BindingContext = new AlarmClockDetailModel { MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = CurrentTime,SelectedTime=(CurrentTime.AddMinutes(30)-CurrentTime) }
+                BindingContext = new AlarmClockDetailModel { MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = CurrentTime, SelectedTime = (CurrentTime.AddMinutes(30) - CurrentTime) }
             });
         }
 
-        async void OnBtnToCalendarClicked(object sender,EventArgs e)
+        async void OnBtnToCalendarClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CalendarAlarmClockPage
             {
-                
+                BindingContext = new CalendarAlarmClockModel { Month = CurrentTime.Month, Year = CurrentTime.Year }
             });
         }
 
@@ -57,8 +63,8 @@ namespace Yibi.Samples.Core.Pages
 
                 await Navigation.PushAsync(new AlarmClockDetailPage
                 {
-                    BindingContext = new AlarmClockDetailModel {ID=model.ID, Name = model.Name,AlarmTime = model.AlarmTime,MusicName = model.MusicName,MusicPath=model.MusicPath, MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = model.AlarmTime,SelectedTime= new TimeSpan(model.AlarmTime.Hour, model.AlarmTime.Minute, model.AlarmTime.Second) }
-                });;
+                    BindingContext = new AlarmClockDetailModel { ID = model.ID, Name = model.Name, AlarmTime = model.AlarmTime, MusicName = model.MusicName, MusicPath = model.MusicPath, MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = model.AlarmTime, SelectedTime = new TimeSpan(model.AlarmTime.Hour, model.AlarmTime.Minute, model.AlarmTime.Second) }
+                }); ;
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Yibi.Samples.Core.ViewModels
+namespace Yibi.Samples.ViewModels
 {
     public class EventModel
     {

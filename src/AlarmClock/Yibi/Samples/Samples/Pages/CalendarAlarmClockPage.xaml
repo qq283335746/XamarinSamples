@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
-             x:Class="Yibi.Samples.Core.Pages.CalendarAlarmClockPage"
+             x:Class="Yibi.Samples.Pages.CalendarAlarmClockPage"
              Title="Calendar Alarm Clock">
 
     <controls:Calendar

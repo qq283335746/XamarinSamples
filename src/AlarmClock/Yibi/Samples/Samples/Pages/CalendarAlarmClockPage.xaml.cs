@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Yibi.Samples.Core.ViewModels;
+using Yibi.Samples.ViewModels;
 
-namespace Yibi.Samples.Core.Pages
+namespace Yibi.Samples.Pages
 {
     public partial class CalendarAlarmClockPage : ContentPage
     {
@@ -17,12 +17,10 @@ namespace Yibi.Samples.Core.Pages
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            BindingContext = new CalendarAlarmClockModel { Month = CurrentTime.Month, Year = CurrentTime.Year };
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //}
 
         private DateTime CurrentTime
         {

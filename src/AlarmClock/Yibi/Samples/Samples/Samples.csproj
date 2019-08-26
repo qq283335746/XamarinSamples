@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Yibi.Samples.Core</RootNamespace>
-    <AssemblyName>Yibi.Samples.Core</AssemblyName>
+    <RootNamespace>Yibi.Samples</RootNamespace>
+    <AssemblyName>Yibi.Samples</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,11 +13,14 @@
 
   <ItemGroup>
     <PackageReference Include="Plugin.MediaManager.Forms" Version="0.8.7" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Xamarin.Plugin.Calendar" Version="1.0.3.200" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Samples.Core\Samples.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +34,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\CalendarAlarmClockPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ShowAlarmClock.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

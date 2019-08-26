@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yibi.Samples.Pages.ShowAlarmClock">
+    <ContentPage.Content>
+        <StackLayout Margin="0,50,0,0" >
+            <Button Text="OK" BackgroundColor="#00CCCC" BorderWidth="0" TextColor="#FFFFFF" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

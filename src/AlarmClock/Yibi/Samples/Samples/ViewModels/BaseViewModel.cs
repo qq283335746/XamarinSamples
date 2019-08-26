@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Yibi.Samples.Core.ViewModels
+namespace Yibi.Samples.ViewModels
 {
     class BaseViewModel : INotifyPropertyChanged
     {

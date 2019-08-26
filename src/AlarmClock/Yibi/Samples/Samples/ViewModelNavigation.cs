@@ -1,8 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
-using Yibi.Samples.Core.ViewModels;
+using Yibi.Samples.ViewModels;
 
-namespace Yibi.Samples.Core
+namespace Yibi.Samples
 {
     class ViewModelNavigation
     {

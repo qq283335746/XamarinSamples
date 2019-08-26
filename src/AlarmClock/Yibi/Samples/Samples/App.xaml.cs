@@ -2,11 +2,10 @@
 using System;
 using System.IO;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Yibi.Samples.Core.Datas;
-using Yibi.Samples.Core.Pages;
+using Yibi.Samples.Core;
+using Yibi.Samples.Pages;
 
-namespace Yibi.Samples.Core
+namespace Yibi.Samples
 {
     public partial class App : Application
     {

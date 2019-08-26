@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yibi.Samples.Core.Models;
-using Yibi.Samples.Core.ViewModels;
+using Yibi.Samples.ViewModels;
 
-namespace Yibi.Samples.Core.Pages
+namespace Yibi.Samples.Pages
 {
     public partial class AlarmClockDetailPage : ContentPage
     {

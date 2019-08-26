@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Plugin.Calendar.Models;
 
-namespace Yibi.Samples.Core.ViewModels
+namespace Yibi.Samples.ViewModels
 {
     class CalendarAlarmClockModel : BaseViewModel
     {

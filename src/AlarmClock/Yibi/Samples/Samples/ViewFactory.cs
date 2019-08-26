@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
-using Yibi.Samples.Core.ViewModels;
+using Yibi.Samples.ViewModels;
 
-namespace Yibi.Samples.Core
+namespace Yibi.Samples
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ViewTypeAttribute : Attribute

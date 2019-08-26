@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Yibi.Samples.Core.ViewModels
+namespace Yibi.Samples.ViewModels
 {
     class AlarmClockDetailModel:BaseViewModel
     {
