@@ -19,7 +19,7 @@ namespace Yibi.Samples.Pages
         {
             InitializeComponent();
 
-            DoTimerRunning();
+            //DoTimerRunning();
         }
 
         protected override async void OnAppearing()
