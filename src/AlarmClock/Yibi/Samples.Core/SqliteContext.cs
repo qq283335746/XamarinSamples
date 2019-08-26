@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Yibi.Samples.Core.Models;
 
@@ -15,6 +15,12 @@ namespace Yibi.Samples.Core
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<AlarmClockInfo>().Wait();
+        }
+
+        public async Task<AlarmClockInfo> GetEnableAlarmClockAsync()
+        {
+            var datas = await _database.Table<AlarmClockInfo>().ToListAsync();
+            return datas.Where(m=>m.AlarmTime >= DateTime.UtcNow && m.AlarmTime <= DateTime.UtcNow.AddSeconds(5) && m.IsEnable).OrderBy(m=>m.AlarmTime).FirstOrDefault();
         }
 
         public async Task<List<AlarmClockInfo>> GetAlarmClocksAsync()

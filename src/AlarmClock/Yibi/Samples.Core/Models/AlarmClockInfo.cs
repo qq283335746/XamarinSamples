@@ -18,6 +18,8 @@ namespace Yibi.Samples.Core.Models
 
         public string MusicPath { get; set; }
 
+        public bool IsEnable { get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public DateTime LastUpdatedDate { get; set; }

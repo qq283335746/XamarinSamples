@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Yibi.Samples.Core.Models;
 using Yibi.Samples.ViewModels;
 using Yibi.Samples.Pages;
+using System.Threading;
 
 namespace Yibi.Samples.Pages
 {
@@ -17,6 +18,8 @@ namespace Yibi.Samples.Pages
         public AlarmClocksPage()
         {
             InitializeComponent();
+
+            DoTimerRunning();
         }
 
         protected override async void OnAppearing()
@@ -24,11 +27,6 @@ namespace Yibi.Samples.Pages
             base.OnAppearing();
 
             listView.ItemsSource = await App.DbContext.GetAlarmClocksAsync();
-
-            await Navigation.PushAsync(new ShowAlarmClock
-            {
-                BindingContext = new AlarmClockDetailModel { MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = CurrentTime, SelectedTime = (CurrentTime.AddMinutes(30) - CurrentTime) }
-            });
         }
 
         private DateTime CurrentTime
@@ -66,6 +64,67 @@ namespace Yibi.Samples.Pages
                     BindingContext = new AlarmClockDetailModel { ID = model.ID, Name = model.Name, AlarmTime = model.AlarmTime, MusicName = model.MusicName, MusicPath = model.MusicPath, MinDate = CurrentTime, MaxDate = CurrentTime.AddYears(1), SelectedDate = model.AlarmTime, SelectedTime = new TimeSpan(model.AlarmTime.Hour, model.AlarmTime.Minute, model.AlarmTime.Second) }
                 }); ;
             }
+        }
+
+        private void DoTimerRunning()
+        {
+            Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            {
+                // UI interaction goes here
+
+                var alarmClockInfo = App.DbContext.GetEnableAlarmClockAsync().Result;
+                if (alarmClockInfo != null)
+                {
+                    if (alarmClockInfo.AlarmTime <= DateTime.UtcNow)
+                    {
+                        Navigation.PushAsync(new ShowAlarmClock
+                        {
+                            BindingContext = alarmClockInfo
+                        }).Wait();
+                    }
+                }
+
+                return true;
+            });
+            //while (true)
+            //{
+            //    var alarmClockInfo = await App.DbContext.GetEnableAlarmClockAsync();
+            //    if (alarmClockInfo != null)
+            //    {
+            //        if (alarmClockInfo.AlarmTime <= DateTime.UtcNow)
+            //        {
+            //            await Navigation.PushAsync(new ShowAlarmClock
+            //            {
+            //                BindingContext = alarmClockInfo
+            //            });
+            //        }
+            //    }
+
+            //    Thread.Sleep(5000);
+            //}
+            //Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            //{
+            //    var alarmClockInfo = App.DbContext.GetEnableAlarmClockAsync().Result;
+            //    if (alarmClockInfo != null)
+            //    {
+            //        if (alarmClockInfo.AlarmTime <= DateTime.UtcNow)
+            //        {
+            //            Navigation.PushAsync(new ShowAlarmClock
+            //            {
+            //                BindingContext = alarmClockInfo
+            //            }).Wait();
+            //        }
+            //    }
+
+            //    return true; // True = Repeat again, False = Stop the timer
+            //});
+
+            //Device.StartTimer(TimeSpan.FromMilliseconds(1000), () =>
+            //{
+            //    var alarmClockInfo = App.DbContext.GetEnableAlarmClockAsync().GetAwaiter().GetResult();
+
+            //    return false;
+            //});
         }
     }
 }

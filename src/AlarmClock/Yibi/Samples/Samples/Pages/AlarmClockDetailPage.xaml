@@ -29,13 +29,16 @@
         <Label Grid.Row="2" Text="Time" VerticalTextAlignment="Center" />
         <TimePicker Grid.Row="2" Grid.Column="1" TabIndex="2" Format="HH:mm:ss" Time="{Binding SelectedTime}" />
 
-        <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <Button Grid.Row="3" Text="Pick Audio" Clicked="OnBtnPickFileClicked" BackgroundColor="LightSeaGreen" TextColor="White" />
+        <Editor Grid.Row="3" Grid.Column="1" Text="{Binding MusicName}" Placeholder="Audio Seleted" />
+        
+        <!--<StackLayout Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Editor Text="{Binding MusicName}" Placeholder="Audio Seleted" WidthRequest="200" />
             <Button Text="Pick Audio" Clicked="OnBtnPickFileClicked" BackgroundColor="LightSeaGreen" TextColor="White" WidthRequest="70" />
             <Button Text="Test" Clicked="OnBtnAudioClicked" BackgroundColor="LightSeaGreen" TextColor="White" WidthRequest="60" />
-        </StackLayout>
+        </StackLayout>-->
         
-        <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,30,0,0">
             <Button Text="Save" Clicked="OnBtnSaveClicked" BackgroundColor="LightSeaGreen" TextColor="White" />
             <Button Text="Delete" Clicked="OnBtnDeleteClicked" BackgroundColor="LightSeaGreen" TextColor="White"/>
         </StackLayout>
