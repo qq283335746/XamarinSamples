@@ -1,6 +1,7 @@
 ﻿using MediaManager;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yibi.Samples.Core.Models;
+using Yibi.Samples.ViewModels;
 
 namespace Yibi.Samples.Pages
 {
     public partial class ShowAlarmClockPage : ContentPage
     {
+        AlarmClockInfo _alarmClockInfo;
+
         public ShowAlarmClockPage()
         {
             InitializeComponent();
@@ -20,10 +24,9 @@ namespace Yibi.Samples.Pages
 
         private async void OnBtnOk_Clicked(object sender, EventArgs e)
         {
-            var alarmClockInfo = (AlarmClockInfo)BindingContext;
-            alarmClockInfo.IsEnable = false;
+            _alarmClockInfo.IsEnable = false;
 
-            await App.DbContext.SaveAlarmClockAsync(alarmClockInfo);
+            await App.DbContext.SaveAlarmClockAsync(_alarmClockInfo);
 
             await CrossMediaManager.Current.Stop();
 
@@ -37,22 +40,17 @@ namespace Yibi.Samples.Pages
             Task.Run(async () =>
             {
                 await BindAsycn();
-            });
+            }).Wait();
         }
 
         private async Task BindAsycn()
         {
-            var alarmClockInfo = (AlarmClockInfo)BindingContext;
+            _alarmClockInfo = (AlarmClockInfo)BindingContext;
+            BindingContext = new ShowAlarmClockModel { Name = _alarmClockInfo.Name, SelectedTime = _alarmClockInfo.AlarmTime.ToString("HH:mm") };
 
-            var oldAlarmClockInfo = await App.DbContext.GetAlarmClockAsync(alarmClockInfo.ID);
-            if(oldAlarmClockInfo != null)
+            if (!string.IsNullOrEmpty(_alarmClockInfo.MusicPath))
             {
-                BindingContext = oldAlarmClockInfo;
-
-                if (!string.IsNullOrEmpty(oldAlarmClockInfo.MusicPath))
-                {
-                    await CrossMediaManager.Current.Play(oldAlarmClockInfo.MusicPath);
-                }
+                await CrossMediaManager.Current.Play(_alarmClockInfo.MusicPath);
             }
         }
 

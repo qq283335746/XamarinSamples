@@ -142,10 +142,10 @@ namespace Yibi.Samples.Pages
 
         void HandleReceivedMessages()
         {
-            MessagingCenter.Subscribe<TickedMessage>(this, "TickedMessage", async message => {
+            MessagingCenter.Subscribe<AlarmClockInfo>(this, "AlarmClockInfoMessage", async message => {
                 await Navigation.PushAsync(new ShowAlarmClockPage
                 {
-                    BindingContext = new AlarmClockInfo { ID = int.Parse(message.Id) }
+                    BindingContext = message
                 });
             });
         }

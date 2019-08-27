@@ -31,7 +31,7 @@ namespace Yibi.Samples
                         CurrentAlarmClockInfo = alarmClockInfo;
 
                         Device.BeginInvokeOnMainThread(() => {
-                            MessagingCenter.Send<TickedMessage>(new TickedMessage { Id = alarmClockInfo.ID.ToString() }, "TickedMessage");
+                            MessagingCenter.Send<AlarmClockInfo>(alarmClockInfo, "AlarmClockInfoMessage");
                         });
                     }
 
