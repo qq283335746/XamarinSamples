@@ -17,23 +17,26 @@ namespace Yibi.Samples.ViewModels
             Culture = CultureInfo.CreateSpecificCulture("en-US");
             Events = new EventCollection();
 
-            var alarmClocks = App.DbContext.GetAlarmClocksAsync().Result;
-            if(alarmClocks != null && alarmClocks.Any())
+            Task.Run(async () =>
             {
-                var q = from r in alarmClocks
-                        group r by r.AlarmTime.ToString("yyyy-MM-dd") into daysGroup
-                        select new
-                        {
-                            date = DateTime.Parse(daysGroup.Key),
-                            datas = alarmClocks.Where(m=>m.AlarmTime.ToString("yyyy-MM-dd") == daysGroup.Key)?.Select(m=>new EventModel { Name=m.Name,Description=m.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss")})
-                        };
-
-                foreach(var item in q)
+                var alarmClocks = await App.DbContext.GetAlarmClocksAsync();
+                if (alarmClocks != null && alarmClocks.Any())
                 {
+                    var q = from r in alarmClocks
+                            group r by r.AlarmTime.ToString("yyyy-MM-dd") into daysGroup
+                            select new
+                            {
+                                date = DateTime.Parse(daysGroup.Key),
+                                datas = alarmClocks.Where(m => m.AlarmTime.ToString("yyyy-MM-dd") == daysGroup.Key)?.Select(m => new EventModel { Name = m.Name, Description = m.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss") })
+                            };
 
-                    Events.Add(item.date, item.datas?.ToList());
+                    foreach (var item in q)
+                    {
+
+                        Events.Add(item.date, item.datas?.ToList());
+                    }
                 }
-            }
+            }).Wait();
         }
 
         public EventCollection Events { get; }

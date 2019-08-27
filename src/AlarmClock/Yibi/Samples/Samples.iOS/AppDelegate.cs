@@ -4,7 +4,10 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 using Yibi.Samples;
+using Yibi.Samples.iOS.Services;
+using Yibi.Samples.Messages;
 
 namespace Yibi.Samples.iOS
 {
@@ -28,5 +31,32 @@ namespace Yibi.Samples.iOS
 
             return base.FinishedLaunching(app, options);
         }
+
+        public static Action BackgroundSessionCompletionHandler;
+
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
+        {
+            Console.WriteLine("HandleEventsForBackgroundUrl(): " + sessionIdentifier);
+            // We get a completion handler which we are supposed to call if our transfer is done.
+            BackgroundSessionCompletionHandler = completionHandler;
+        }
+
+        #region Methods
+
+        LongRunningTaskService _longRunningTaskService;
+
+        void WireUpLongRunningTask()
+        {
+            MessagingCenter.Subscribe<StartLongRunningTaskMessage>(this, "StartLongRunningTaskMessage", async message => {
+                _longRunningTaskService = new LongRunningTaskService();
+                await _longRunningTaskService.Start();
+            });
+
+            MessagingCenter.Subscribe<StopLongRunningTaskMessage>(this, "StopLongRunningTaskMessage", message => {
+                _longRunningTaskService.Stop();
+            });
+        }
+
+        #endregion
     }
 }
