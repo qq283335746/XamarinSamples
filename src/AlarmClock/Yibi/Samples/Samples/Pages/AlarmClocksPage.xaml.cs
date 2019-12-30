@@ -52,7 +52,7 @@ namespace Yibi.Samples.Pages
         {
             await Navigation.PushAsync(new CalendarAlarmClockPage
             {
-                BindingContext = new CalendarAlarmClockModel { Month = CurrentTime.Month, Year = CurrentTime.Year }
+                BindingContext = await CalendarAlarmClockModel.CreateAsync()
             });
         }
 
